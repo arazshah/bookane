@@ -13,136 +13,17 @@
       href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
-    <style>
-      :root {
-        --crystal-primary: #6366f1;
-        --crystal-secondary: #818cf8;
-        --crystal-accent: #a5b4fc;
-        --crystal-bg: #f8fafc;
-        --crystal-text: #1e293b;
-      }
-
-      body {
-        font-family: "Vazirmatn", sans-serif;
-        background-color: var(--crystal-bg);
-        color: var(--crystal-text);
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-      }
-
-      .main-content {
-        flex: 1;
-      }
-
-      .crystal-card {
-        background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-          0 2px 4px -1px rgba(0, 0, 0, 0.06);
-      }
-
-      .crystal-nav-item {
-        transition: all 0.3s ease;
-        display: block;
-        padding: 0.5rem 1rem;
-        color: var(--crystal-text);
-        text-decoration: none;
-        border-radius: 0.25rem;
-        margin-bottom: 0.25rem;
-      }
-
-      .crystal-nav-item:hover {
-        background: rgba(99, 102, 241, 0.1);
-        transform: translateX(-4px);
-      }
-
-      .crystal-nav-item.active {
-        background: rgba(99, 102, 241, 0.2);
-        border-right: 3px solid var(--crystal-primary);
-        font-weight: 500;
-      }
-
-      .markdown-content h1 {
-        color: var(--crystal-primary);
-        border-bottom: 2px solid var(--crystal-accent);
-        padding-bottom: 0.5rem;
-        margin-bottom: 1.5rem;
-      }
-
-      .markdown-content h2 {
-        color: var(--crystal-secondary);
-        margin-top: 2rem;
-        margin-bottom: 1rem;
-      }
-
-      .markdown-content code {
-        background: rgba(99, 102, 241, 0.1);
-        padding: 0.2rem 0.4rem;
-        border-radius: 0.25rem;
-        font-family: monospace;
-      }
-
-      .markdown-content pre {
-        background: rgba(99, 102, 241, 0.1);
-        padding: 1rem;
-        border-radius: 0.5rem;
-        overflow-x: auto;
-      }
-
-      .markdown-content a {
-        color: var(--crystal-primary);
-        text-decoration: none;
-        border-bottom: 1px dashed var(--crystal-accent);
-      }
-
-      .markdown-content a:hover {
-        color: var(--crystal-secondary);
-        border-bottom-style: solid;
-      }
-
-      .sidebar-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-      }
-
-      .sidebar-list li {
-        margin-bottom: 0.5rem;
-      }
-
-      .child-list {
-        margin-right: 1rem;
-        margin-top: 0.5rem;
-        border-right: 1px solid rgba(99, 102, 241, 0.2);
-        padding-right: 0.5rem;
-      }
-
-      .footer {
-        background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(10px);
-        border-top: 1px solid rgba(255, 255, 255, 0.2);
-        padding: 1rem 0;
-        margin-top: 2rem;
-      }
-
-      .footer-content {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      .footer-link {
-        color: var(--crystal-primary);
-        text-decoration: none;
-        transition: color 0.3s ease;
-      }
-
-      .footer-link:hover {
-        color: var(--crystal-secondary);
-      }
-    </style>
+    <!-- Highlight.js for syntax highlighting -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <!-- Custom styles -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
   </head>
   <body>
     <div class="main-content">
@@ -246,6 +127,11 @@
                 swap: "innerHTML",
               });
             });
+          });
+        } else if (evt.target.id === "content") {
+          // Apply syntax highlighting to code blocks
+          document.querySelectorAll("pre code").forEach((block) => {
+            hljs.highlightElement(block);
           });
         }
       });
