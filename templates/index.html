@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>مستندات</title>
+    <!-- HTMX -->
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Vazirmatn Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --crystal-primary: #6366f1;
+        --crystal-secondary: #818cf8;
+        --crystal-accent: #a5b4fc;
+        --crystal-bg: #f8fafc;
+        --crystal-text: #1e293b;
+      }
+
+      body {
+        font-family: "Vazirmatn", sans-serif;
+        background-color: var(--crystal-bg);
+        color: var(--crystal-text);
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      .main-content {
+        flex: 1;
+      }
+
+      .crystal-card {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      }
+
+      .crystal-nav-item {
+        transition: all 0.3s ease;
+        display: block;
+        padding: 0.5rem 1rem;
+        color: var(--crystal-text);
+        text-decoration: none;
+        border-radius: 0.25rem;
+        margin-bottom: 0.25rem;
+      }
+
+      .crystal-nav-item:hover {
+        background: rgba(99, 102, 241, 0.1);
+        transform: translateX(-4px);
+      }
+
+      .crystal-nav-item.active {
+        background: rgba(99, 102, 241, 0.2);
+        border-right: 3px solid var(--crystal-primary);
+        font-weight: 500;
+      }
+
+      .markdown-content h1 {
+        color: var(--crystal-primary);
+        border-bottom: 2px solid var(--crystal-accent);
+        padding-bottom: 0.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .markdown-content h2 {
+        color: var(--crystal-secondary);
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+      }
+
+      .markdown-content code {
+        background: rgba(99, 102, 241, 0.1);
+        padding: 0.2rem 0.4rem;
+        border-radius: 0.25rem;
+        font-family: monospace;
+      }
+
+      .markdown-content pre {
+        background: rgba(99, 102, 241, 0.1);
+        padding: 1rem;
+        border-radius: 0.5rem;
+        overflow-x: auto;
+      }
+
+      .markdown-content a {
+        color: var(--crystal-primary);
+        text-decoration: none;
+        border-bottom: 1px dashed var(--crystal-accent);
+      }
+
+      .markdown-content a:hover {
+        color: var(--crystal-secondary);
+        border-bottom-style: solid;
+      }
+
+      .sidebar-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .sidebar-list li {
+        margin-bottom: 0.5rem;
+      }
+
+      .child-list {
+        margin-right: 1rem;
+        margin-top: 0.5rem;
+        border-right: 1px solid rgba(99, 102, 241, 0.2);
+        padding-right: 0.5rem;
+      }
+
+      .footer {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(10px);
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 1rem 0;
+        margin-top: 2rem;
+      }
+
+      .footer-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .footer-link {
+        color: var(--crystal-primary);
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .footer-link:hover {
+        color: var(--crystal-secondary);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-content">
+      <div class="container mx-auto px-4 py-8">
+        <header class="mb-8">
+          <h1 class="text-4xl font-bold text-indigo-600">مستندات</h1>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <!-- Sidebar -->
+          <aside class="md:col-span-1">
+            <div class="crystal-card rounded-lg p-4 sticky top-4">
+              <nav id="sidebar" hx-get="/api/chapters" hx-trigger="load">
+                <!-- Chapters will be loaded here -->
+              </nav>
+            </div>
+          </aside>
+
+          <!-- Main content -->
+          <main class="md:col-span-3">
+            <div class="crystal-card rounded-lg p-6">
+              <div
+                id="content"
+                hx-get="/api/content/intro"
+                hx-trigger="load"
+                class="markdown-content"
+              >
+                <!-- Content will be loaded here -->
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="container mx-auto px-4">
+        <div class="footer-content">
+          <div class="text-sm text-gray-600">
+            © 2024
+            <a href="https://araz.me" class="footer-link" target="_blank"
+              >araz.me</a
+            >
+          </div>
+          <div class="text-sm text-gray-600">ساخته شده با ❤️</div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Function to build nested navigation
+      function buildNavigation(chapters, level = 0) {
+        let html =
+          level === 0 ? '<ul class="sidebar-list">' : '<ul class="child-list">';
+
+        chapters.forEach((chapter) => {
+          const hasChildren = chapter.children && chapter.children.length > 0;
+          const isActive = chapter.path === "intro";
+
+          html += `
+                    <li>
+                        <a href="#" 
+                           class="crystal-nav-item ${isActive ? "active" : ""}" 
+                           data-path="${chapter.path}">
+                            ${chapter.title}
+                        </a>
+                        ${
+                          hasChildren
+                            ? buildNavigation(chapter.children, level + 1)
+                            : ""
+                        }
+                    </li>
+                `;
+        });
+
+        html += "</ul>";
+        return html;
+      }
+
+      // Handle HTMX after swap events
+      document.body.addEventListener("htmx:afterSwap", function (evt) {
+        if (evt.target.id === "sidebar") {
+          const chapters = JSON.parse(evt.detail.xhr.response);
+          evt.target.innerHTML = buildNavigation(chapters);
+
+          // Add click handlers to chapter links
+          document.querySelectorAll("#sidebar a").forEach((link) => {
+            link.addEventListener("click", function (e) {
+              e.preventDefault();
+              const path = this.getAttribute("data-path");
+
+              // Update active state
+              document
+                .querySelectorAll("#sidebar a")
+                .forEach((a) => a.classList.remove("active"));
+              this.classList.add("active");
+
+              // Load content
+              htmx.ajax("GET", `/api/content/${path}`, {
+                target: "#content",
+                swap: "innerHTML",
+              });
+            });
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
