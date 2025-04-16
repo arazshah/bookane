@@ -1,0 +1,174 @@
+<!-- Required Stylesheets -->
+<link rel="stylesheet" href="/static/style.css" />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600&display=swap"
+/>
+
+<!-- Required Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+<div class="navigation-container mt-8 pt-4 border-t border-gray-200">
+  <div class="flex justify-between items-center">
+    <div class="navigation-prev">
+      {% if navigation.prev %}
+      <a
+        href="/api/content/{{ navigation.prev.path }}"
+        class="crystal-nav-item flex items-center"
+        hx-get="/api/content/{{ navigation.prev.path }}"
+        hx-target="#content"
+        hx-swap="innerHTML"
+        hx-trigger="click"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5 ml-2"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M15 19l-7-7 7-7"
+          />
+        </svg>
+        {{ navigation.prev.title }}
+      </a>
+      {% else %}
+      <span class="text-gray-400 flex items-center">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5 ml-2 opacity-50"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M15 19l-7-7 7-7"
+          />
+        </svg>
+        ابتدا
+      </span>
+      {% endif %}
+    </div>
+
+    <div class="navigation-current text-sm text-gray-500">
+      {{ navigation.current.title }}
+    </div>
+
+    <div class="navigation-next">
+      {% if navigation.next %}
+      <a
+        href="/api/content/{{ navigation.next.path }}"
+        class="crystal-nav-item flex items-center"
+        hx-get="/api/content/{{ navigation.next.path }}"
+        hx-target="#content"
+        hx-swap="innerHTML"
+        hx-trigger="click"
+      >
+        {{ navigation.next.title }}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5 mr-2"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 5l7 7-7 7"
+          />
+        </svg>
+      </a>
+      {% else %}
+      <span class="text-gray-400 flex items-center">
+        پایان
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5 mr-2 opacity-50"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 5l7 7-7 7"
+          />
+        </svg>
+      </span>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Add click event listeners to navigation links
+    const navLinks = document.querySelectorAll(".navigation-container a");
+
+    navLinks.forEach((link) => {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        const path = this.getAttribute("href").replace("/api/content/", "");
+        console.log("Navigating to:", path);
+
+        // Update active state in sidebar
+        document.querySelectorAll("#sidebar a").forEach((sidebarLink) => {
+          if (sidebarLink.getAttribute("data-path") === path) {
+            sidebarLink.classList.add("active");
+          } else {
+            sidebarLink.classList.remove("active");
+          }
+        });
+      });
+    });
+  });
+
+  // Add hover animations
+  document.addEventListener("DOMContentLoaded", () => {
+    const navButtons = document.querySelectorAll(".book-nav:not(.disabled)");
+
+    navButtons.forEach((button) => {
+      button.addEventListener("mouseenter", () => {
+        button.style.transform = "translateY(-2px)";
+        button.style.boxShadow =
+          "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)";
+
+        const icon = button.querySelector(".nav-icon");
+        if (icon) {
+          icon.style.transform = "scale(1.1)";
+        }
+
+        const effect = button.querySelector(".page-turn-effect");
+        if (effect) {
+          effect.style.opacity = "1";
+        }
+      });
+
+      button.addEventListener("mouseleave", () => {
+        button.style.transform = "translateY(0)";
+        button.style.boxShadow = "none";
+
+        const icon = button.querySelector(".nav-icon");
+        if (icon) {
+          icon.style.transform = "scale(1)";
+        }
+
+        const effect = button.querySelector(".page-turn-effect");
+        if (effect) {
+          effect.style.opacity = "0";
+        }
+      });
+    });
+  });
+</script>

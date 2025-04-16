@@ -192,6 +192,15 @@
         "documentation": {}
     },
     {
+        "label": "get_all_pages",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def get_all_pages():\n    \"\"\"Get a flat list of all pages in order for navigation\"\"\"\n    pages = []\n    chapters = get_chapters()\n    for chapter in chapters:\n        # Add the main chapter\n        pages.append({\n            'title': chapter['title'],\n            'path': chapter['path']\n        })",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
         "label": "index",
         "kind": 2,
         "importPath": "app",
