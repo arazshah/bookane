@@ -5,9 +5,11 @@ order: 1
 
 # معرفی
 
-به Bookane خوش آمدید! این یک سیستم مستندساز مدرن و بسیار ساده است. 
+به `Bookane` خوش آمدید! این یک سیستم مستندساز مدرن و بسیار ساده است. 
 
 حال بیایید به دلیل نام‌گذاری این پروژه بپردازیم. شاید باور نکنید، اما نام "بووکانه" از واژه "صبحانه" گرفته شده است. پسوند "آنه" به معنای اقدامی است که در صبح انجام می‌شود. بنابراین، ما نیز اقدامی را که با کتاب، یا بهتر بگوییم، به مانند کتاب صورت می‌گیرد، به عنوان ایده نام "bookane" انتخاب کرده‌ایم.
+
+[ویدیو توضیحات](https://www.aparat.com/v/qzlu2g7)
 
 ## ویژگی‌ها
 
@@ -32,11 +34,11 @@ order: 1
 - می‌توانید از Markdown برای قالب‌بندی محتوا استفاده کنید
 
 ``` ltr
-# English Section
+English Section
 
 This is an example of English content that will be displayed properly in left-to-right direction.
 
-## Features
+Features
 
 - Persian language support
 - RTL support
@@ -44,7 +46,7 @@ This is an example of English content that will be displayed properly in left-to
 - Markdown content loading
 - Responsive UI
 
-## Getting Started
+Getting Started
 
 To get started with this documentation system, follow these steps:
 
@@ -52,7 +54,7 @@ To get started with this documentation system, follow these steps:
 2. Use frontmatter to set the title and order of chapters
 3. Use Markdown for content formatting
 
-## Important Notes
+Important Notes
 
 - Vazirmatn font is used for better Persian text display
 - All content is loaded dynamically
