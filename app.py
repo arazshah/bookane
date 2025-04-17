@@ -3,6 +3,7 @@ import os
 import frontmatter
 import mistune
 from pathlib import Path
+import re
 
 app = Flask(__name__)
 
@@ -97,7 +98,25 @@ def get_content(chapter):
 
         with open(file_path, 'r', encoding='utf-8') as f:
             post = frontmatter.load(f)
-            content = markdown(post.content)
+            content = post.content
+
+            # Process LTR code blocks before converting to HTML
+            # Find all code blocks with 'ltr' language identifier
+            ltr_pattern = r'```ltr\s*\n(.*?)\n```'
+
+            def process_ltr_content(match):
+                ltr_content = match.group(1)
+                # Convert the LTR content to HTML separately
+                ltr_html = markdown(ltr_content)
+                # Wrap in LTR container
+                return f'<div class="ltr-section" dir="ltr" lang="en">{ltr_html}</div>'
+
+            # Replace all LTR code blocks with properly formatted divs
+            content = re.sub(ltr_pattern, process_ltr_content,
+                             content, flags=re.DOTALL)
+
+            # Now convert the rest of the content to HTML
+            html_content = markdown(content)
 
             # Get navigation information
             all_pages = get_all_pages()
@@ -113,7 +132,7 @@ def get_content(chapter):
             # Add navigation HTML to the content
             nav_html = render_template(
                 'navigation.html', navigation=navigation)
-            return content + nav_html
+            return html_content + nav_html
     except FileNotFoundError:
         return "Chapter not found", 404
 

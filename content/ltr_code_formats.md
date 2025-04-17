@@ -1,15 +1,26 @@
-# LTR (Left-to-Right) Code Format Display Rules
+# قوانین نمایش فرمت کد LTR (چپ به راست)
 
-## General LTR Formatting Rules
+## قوانین کلی فرمت بندی LTR
 
-1. All code must be written and displayed from left to right
-2. Indentation should be consistent and aligned to the left
-3. Line breaks should be used to maintain readability
-4. Comments should be placed to the right of the code they describe
+1. تمام کد باید از چپ به راست نوشته و نمایش داده شود.
+2. تو رفتگی باید منظم و به سمت چپ تراز شود.
+3. برای حفظ خوانایی، باید از شکست‌های خط استفاده شود.
+4. نظرات باید در سمت راست کدی که توضیح می‌دهند، قرار بگیرند.
 
-## Code Block Examples
+# مثال‌های بلوک کد
 
 ### Basic LTR Structure
+
+```python
+# Correct LTR format
+def function_name():
+    # Comment explaining the function
+    return result
+```
+
+### English Section
+
+
 ```python
 # Correct LTR format
 def function_name():
@@ -23,6 +34,7 @@ def function_name():
 ```
 
 ### Variable Declarations
+
 ```python
 # Correct LTR format
 variable_name = value  # Comment explaining the variable
@@ -32,6 +44,7 @@ variable_name = value  # Comment on the left
 ```
 
 ### Function Calls
+
 ```python
 # Correct LTR format
 result = function_name(parameter1, parameter2)  # Comment explaining the call
@@ -41,6 +54,7 @@ result = function_name(parameter1, parameter2)  # Comment on the left
 ```
 
 ### Control Structures
+
 ```python
 # Correct LTR format
 if condition:  # Comment explaining the condition
@@ -57,6 +71,7 @@ if condition:  # Comment on the left
 ```
 
 ### Class Definitions
+
 ```python
 # Correct LTR format
 class ClassName:  # Comment explaining the class
@@ -74,6 +89,7 @@ class ClassName:  # Comment on the left
 ```
 
 ### Data Structures
+
 ```python
 # Correct LTR format
 my_list = [  # Comment explaining the list
@@ -96,6 +112,7 @@ my_list = [  # Comment on the left
 ```
 
 ### Error Handling
+
 ```python
 # Correct LTR format
 try:  # Comment explaining the try block
@@ -116,6 +133,7 @@ except Exception as e:  # Comment on the left
 ```
 
 ### Import Statements
+
 ```python
 # Correct LTR format
 import module_name  # Comment explaining the import
@@ -129,6 +147,7 @@ from package import (  # Comment explaining the imports
 import module_name  # Comment on the left
 ```
 
+``` ltr
 ## Best Practices for LTR Code Display
 
 1. **Comments Placement**
@@ -177,3 +196,5 @@ import module_name  # Comment on the left
    - Add LTR formatting checks to your CI pipeline
    - Use automated tools to verify LTR compliance
    - Include LTR formatting in code review checklists 
+   
+```
