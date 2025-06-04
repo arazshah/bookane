@@ -1,0 +1,90 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0"/> <title>Bookane – Personal Book Library</title> <meta name="description" content="Bookane: An open-source self-hosted personal book library."> <style> @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+:root {
+  --primary: #4F46E5;
+  --bg: #F9FAFB;
+  --text: #111827;
+  --gray: #6B7280;
+  --radius: 12px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+header {
+  padding: 4rem 2rem;
+  text-align: center;
+  background: linear-gradient(135deg, #4F46E5, #3B82F6);
+  color: white;
+}
+
+header h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+header p {
+  font-size: 1.25rem;
+  max-width: 640px;
+  margin: 0 auto;
+  opacity: 0.95;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 4rem 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.card h3 {
+  margin-bottom: 0.5rem;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.cta {
+  text-align: center;
+  padding: 2rem;
+}
+
+.cta a {
+  background: var(--primary);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+.cta a:hover {
+  background: #3730A3;
+}
+
+footer {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--gray);
+  padding: 2rem 1rem;
+}
+</style> </head> <body> <header> <h1>📚 Welcome to Bookane</h1> <p>Your self-hosted platform to organize and share your personal book library.</p> </header> <section class="features"> <div class="card"> <h3>🔍 Easy Search & Tag</h3> <p>Find any book instantly using filters, tags, and smart search.</p> </div> <div class="card"> <h3>🏷️ Custom Organization</h3> <p>Tag, group, and describe your library just the way you like it.</p> </div> <div class="card"> <h3>🔐 100% Private & Open-Source</h3> <p>No tracking. Host it yourself. Built with privacy in mind.</p> </div> </section> <section class="cta"> <a href="https://github.com/arazshah/bookane" target="_blank">🚀 View Project on GitHub</a> </section> <footer> &copy; 2025 Bookane · Made with ❤️ by Araz Shah </footer> </body> </html>
